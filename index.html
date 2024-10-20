@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md p-4 flex items-center justify-between">
+        <!-- Logo -->
+        <div class="flex items-center space-x-[10px]">
+            <!-- Nút Menu -->
+            <button>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                </svg>                 
+            </button>
+            <!-- Logo YouTube -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b8/YouTube_Logo_2017.svg" alt="YouTube Logo" class="h-5">
+        </div>
+        <!-- Search Bar -->
+        <div class="flex items-center space-x-0 flex-grow max-w-lg h-full w-full">
+            <div class="relative w-full">
+                <input 
+                    type="text" 
+                    id="search-bar" 
+                    placeholder="Tìm kiếm..." 
+                    class="w-full border border-gray-300 rounded-l-full pr-12 focus:outline-none focus:border-blue-500 px-4 h-10"
+                    style="width: 500px;" 
+                    onfocus="showSuggestions()" 
+                    oninput="filterSuggestions()">
+                <div id="suggestions" class="absolute left-0 z-10 w-full mt-1 bg-white border border-gray-300 rounded-md opacity-0 pointer-events-none transition-opacity duration-200">
+                        <ul id="suggestion-list" class="max-h-60 overflow-hidden">
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>Bình Yên - Vũ ft Binz | Em như dòng nước trong veo... Những Bài Hát Nhạc Trẻ Cực Chill Gây Nghiện</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>Chillies Playlist Mùa Thu | Mascara, Cứ Chill Thôi, Vùng Ký Ức - Những Bài Hát Hay Nhất Của Chillies</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>Tin Vào Chính Mình | Bài Hát Hay Nhất 2024, Nhạc Trẻ - Nhạc Lofi Chill Lời Thư Giãn Nhẹ Nhàng</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>Em Còn Những Thiếu Sót Đang Cố Gắng Để Hoàn Thiện Hơn Remix TREND TikTok - Để Anh Lương Thiện Remix</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>📻 𝐏𝐥𝐚𝐲𝐥𝐢𝐬𝐭 Chill Mùa Thu Không Thể Bỏ Lỡ | GenZ nghe gì khi mùa thu về? | Hẹn Em Ở Lần Yêu Thứ 2</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>NHẠC NGHE TRÊN XE 🎧 VIET DEEP 2024 - MIXTAPE HOUSE LAK SET NHẠC CŨ 9X - DEEP HOUSE CHILL 8X9X</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>Yêu 5, 2AM, Bước Qua Mùa Cô Đơn, Lạ Lùng,...| Những Bản Nhạc Ballad Cực Hay Nghe Là Nghiện Luôn</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>Crying Over You, Cơn Mưa Cuối, Bâng Khuâng - TOP Những Bài Hát Được "REPLAY" Nhiều Nhất Của JUSTATEE</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>JUSTATEE - Crying Over You x Cơn Mưa Cuối x Bâng Khuâng - Top 10 Bản LYRICS Hay Nhất Của Justatee</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>BINZ | Cơn Mưa Cuối, Phía Sau Em, Crying Over You - Những Bài RAP BUỒN Hay Nhất Của BINZ</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>Cho Mình Em, Crying Over You... Đen Vâu ft. Binz - Những Bài Rap Buồn TRIỆU VIEW Hay Của BINZ</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>Bạn Có Tài Mà Collection #1 - Liều thuốc cho những người cô đơn</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>CHILL BASS 2024 - NHẠC NGHE TRÊN BAR - NHẠC REMIX DEEP HOUSE & HOUSE LAK CỰC XỊN HAY NHẤT 2024</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>Đắm Chìm Trong Nỗi Nhớ Qua Từng Câu Hát Của VŨ - Những Lời Hứa Bỏ Quên, Anh Nhớ Ra | Live Mới 2024</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>Forget About Her - JustaTee | Phố xá đã lên đèn rồi...| Playlist Top 10 Bản Hits Cực Hot 2024</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>Justatee x Binz | Cơn Mưa Cuối, Crying Over You | TOP 10 Ca Khúc BUỒN Hay Nhất Của Justatee, BINZ</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>Concert ATVNCG 2024 - If & Lặng & Là anh đó & Bao tiền một mớ bình yên</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>NHẬT PHÁT Những Ca Khúc Hay Nhất 2024 - NGÔI NHÀ HẠNH PHÚC, ĐAU ĐỂ TRƯỞNG THÀNH, ĐÃ SAI TỪ LÚC ĐẦU</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>Hoàng Dũng - Liên khúc Chờ Anh Nhé - Chẳng Nói Nên Lời - Yếu Đuối - Live at Yên Concert</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                            <li class="flex justify-between items-center px-4 py-2 hover:bg-gray-100 cursor-pointer" onclick="selectSuggestion(this)">
+                                <span>VÌ MẤT ĐI ÁNH MẶT TRỜI (nên anh) YẾU ĐUỐI | Trung Quân x Hoàng Dũng | Live at HAY Fest 2023</span>
+                                <button class="text-red-500 hover:text-red-700 ml-2" onclick="removeSuggestion(event)">Xóa</button>
+                            </li>
+                        </ul>
+                </div>
+            </div> 
+        
+            <div class="flex items-center"> 
+                <button class="bg-gray-200 rounded-r-full p-2 h-full w-12 flex items-center justify-center"> 
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>                 
+                </button>
+            </div>
+        
+            <button class="bg-gray-200 rounded-full p-2 h-full w-12 flex items-center justify-center"> 
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                    <path d="M8.25 4.5a3.75 3.75 0 1 1 7.5 0v8.25a3.75 3.75 0 1 1-7.5 0V4.5Z" />
+                    <path d="M6 10.5a.75.75 0 0 1 .75.75v1.5a5.25 5.25 0 1 0 10.5 0v-1.5a.75.75 0 0 1 1.5 0v1.5a6.751 6.751 0 0 1-6 6.709v2.291h3a.75.75 0 0 1 0 1.5h-7.5a.75.75 0 0 1 0-1.5h3v-2.291a6.751 6.751 0 0 1-6-6.709v-1.5A.75.75 0 0 1 6 10.5Z" />
+                </svg>                                  
+            </button>
+        </div>
+            
+        <!-- Icons -->
+        <div class="flex items-center space-x-4">
+            <button>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>                                    
+            </button>
+            <button>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+                  </svg>                  
+            </button>
+            <button>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                  </svg>                  
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-6 flex">
+        <!-- Main Video Section -->
+        <div class="flex-grow">
+            <div class="bg-black w-[960px] h-[540px] mx-auto rounded-lg overflow-hidden relative">
+                <!-- Embed main video here -->
+                <img src="img/anh1.png" alt="">
+            
+                <!-- Custom video controls -->
+                <div class="absolute bottom-0 w-full bg-gray-900 text-white p-2">
+                    <!-- Progress Bar -->
+                    <div class="w-full h-1 bg-gray-600 rounded-lg mb-2">
+                        <div class="bg-red-500 h-1 rounded-lg" style="width: 30%;"></div> <!-- Example progress -->
+                    </div>
+            
+                    <!-- Control Buttons -->
+                    <div class="flex justify-between items-center">
+                        <!-- Left controls: Play, Pause, Forward, Mute -->
+                        <div class="flex space-x-4">
+                            <button class="text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                                    <path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 0 1 .75-.75H9a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H7.5a.75.75 0 0 1-.75-.75V5.25Zm7.5 0A.75.75 0 0 1 15 4.5h1.5a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H15a.75.75 0 0 1-.75-.75V5.25Z" clip-rule="evenodd" />
+                                </svg>
+                                <!-- Play -->
+                            </button>
+                            <button class="text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                                    <path d="M12.75 4a.75.75 0 0 0-.75.75v10.5c0 .414.336.75.75.75h.5a.75.75 0 0 0 .75-.75V4.75a.75.75 0 0 0-.75-.75h-.5ZM17.75 4a.75.75 0 0 0-.75.75v10.5c0 .414.336.75.75.75h.5a.75.75 0 0 0 .75-.75V4.75a.75.75 0 0 0-.75-.75h-.5ZM3.288 4.819A1.5 1.5 0 0 0 1 6.095v7.81a1.5 1.5 0 0 0 2.288 1.277l6.323-3.906a1.5 1.5 0 0 0 0-2.552L3.288 4.819Z" />
+                                </svg>
+                                <!-- Other Controls -->
+                            </button>
+                            <div class="flex items-center space-x-2">
+                                <!-- loa -->
+                                <button class="flex items-center bg-transparent border-none p-0 outline-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-white">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h4l5-5v14l-5-5H3z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 100-6 3 3 0 000 6z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.571 12.414a7.5 7.5 0 10-1.414 1.414" />
+                                    </svg>
+                                </button>
+                        
+                                <!-- Thanh âm lượng -->
+                                <input type="range" id="volumeSlider" class="w-9" value="100" min="0" max="100" step="1" style="height: 5px;">
+                            </div>
+                        
+                            <script>
+                                const volumeSlider = document.getElementById('volumeSlider');
+                        
+                                // Đặt giá trị âm lượng ban đầu
+                                player.setVolume(100); // Đặt âm lượng tối đa
+                        
+                                // Cập nhật âm lượng khi thanh kéo thay đổi
+                                volumeSlider.addEventListener('input', function() {
+                                    const volume = volumeSlider.value;
+                                    player.setVolume(volume);
+                                });
+                            </script>
+                        </div>
+                        
+                        <!-- Right controls: Autoplay, CC, Settings, Cinema, Fullscreen -->
+                        <div class="flex space-x-4">
+                            <button class="flex items-center bg-transparent border-none p-0 outline-none">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+                                    <path fill-rule="evenodd" d="M2 10a8 8 0 1 1 16 0 8 8 0 0 1-16 0Zm6.39-2.908a.75.75 0 0 1 .766.027l3.5 2.25a.75.75 0 0 1 0 1.262l-3.5 2.25A.75.75 0 0 1 8 12.25v-4.5a.75.75 0 0 1 .39-.658Z" clip-rule="evenodd" />
+                                  </svg>                                  
+                            </button>
+                            <button class="text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h5">
+                                    <path d="M6 3C4.895 3 4 3.895 4 5v14c0 1.105.895 2 2 2h12c1.105 0 2-.895 2-2V5c0-1.105-.895-2-2-2H6zm5 15H7v-2h4v2zm0-4H7v-2h4v2zm5 4h-4v-2h4v2zm0-4h-4v-2h4v2z" />
+                                </svg>
+                            </button>
+                            <button class="text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.343 3.94c.09-.542.56-.94 1.11-.94h1.093c.55 0 1.02.398 1.11.94l.149.894c.07.424.384.764.78.93.398.164.855.142 1.205-.108l.737-.527a1.125 1.125 0 0 1 1.45.12l.773.774c.39.389.44 1.002.12 1.45l-.527.737c-.25.35-.272.806-.107 1.204.165.397.505.71.93.78l.893.15c.543.09.94.559.94 1.109v1.094c0 .55-.397 1.02-.94 1.11l-.894.149c-.424.07-.764.383-.929.78-.165.398-.143.854.107 1.204l.527.738c.32.447.269 1.06-.12 1.45l-.774.773a1.125 1.125 0 0 1-1.449.12l-.738-.527c-.35-.25-.806-.272-1.203-.107-.398.165-.71.505-.781.929l-.149.894c-.09.542-.56.94-1.11.94h-1.094c-.55 0-1.019-.398-1.11-.94l-.148-.894c-.071-.424-.384-.764-.781-.93-.398-.164-.854-.142-1.204.108l-.738.527c-.447.32-1.06.269-1.45-.12l-.773-.774a1.125 1.125 0 0 1-.12-1.45l.527-.737c.25-.35.272-.806.108-1.204-.165-.397-.506-.71-.93-.78l-.894-.15c-.542-.09-.94-.56-.94-1.109v-1.094c0-.55.398-1.02.94-1.11l.894-.149c.424-.07.765-.383.93-.78.165-.398.143-.854-.108-1.204l-.526-.738a1.125 1.125 0 0 1 .12-1.45l.773-.773a1.125 1.125 0 0 1 1.45-.12l.737.527c.35.25.807.272 1.204.107.397-.165.71-.505.78-.929l.15-.894Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                  </svg>                                  
+                            </button>
+                            <button class="text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 9V4.5M9 9H4.5M9 9 3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5M15 15v4.5m0-4.5 5.25 5.25" />
+                                  </svg>
+                            </button>
+                            <button class="text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+                                  </svg>                                  
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video Details -->
+            <div class="p-4">
+                <!-- Video title -->
+                <h1 class="text-xl font-bold">Nhạc Piano Nhẹ Nhàng Cùng Tiếng Mưa Rơi Sẽ Giúp Bạn Thư Giãn Giãm Stress Hiệu Quả</h1>
+
+                <!-- Channel and action buttons -->
+                <div class="flex items-center justify-between mt-4">
+                    <!-- Channel info -->
+                    <div class="flex items-center space-x-4">
+                        <img src="img/anh2.png" class="rounded-full">
+                        <div class="flex items-center space-x-2">
+                            <div>
+                                <p class="font-bold text-lg">Nhạc không lời thư giãn</p>
+                                <h2 class="text-sm">140N Người đăng kí</h2>
+                            </div>
+                            <button class="bg-black text-white px-4 py-1 rounded-full border border-black">Đăng ký</button> 
+                        </div>
+                    </div>                    
+
+                    <!-- Action buttons -->
+                    <div class="flex space-x-4">
+                        <button class="flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.633 10.25c.806 0 1.533-.446 2.031-1.08a9.041 9.041 0 0 1 2.861-2.4c.723-.384 1.35-.956 1.653-1.715a4.498 4.498 0 0 0 .322-1.672V2.75a.75.75 0 0 1 .75-.75 2.25 2.25 0 0 1 2.25 2.25c0 1.152-.26 2.243-.723 3.218-.266.558.107 1.282.725 1.282m0 0h3.126c1.026 0 1.945.694 2.054 1.715.045.422.068.85.068 1.285a11.95 11.95 0 0 1-2.649 7.521c-.388.482-.987.729-1.605.729H13.48c-.483 0-.964-.078-1.423-.23l-3.114-1.04a4.501 4.501 0 0 0-1.423-.23H5.904m10.598-9.75H14.25M5.904 18.5c.083.205.173.405.27.602.197.4-.078.898-.523.898h-.908c-.889 0-1.713-.518-1.972-1.368a12 12 0 0 1-.521-3.507c0-1.553.295-3.036.831-4.398C3.387 9.953 4.167 9.5 5 9.5h1.053c.472 0 .745.556.5.96a8.958 8.958 0 0 0-1.302 4.665c0 1.194.232 2.333.654 3.375Z" />
+                              </svg>                                    
+                            <span>Like</span>
+                        </button>
+                        <button class="flex items-center space-x-2">
+                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.498 15.25H4.372c-1.026 0-1.945-.694-2.054-1.715a12.137 12.137 0 0 1-.068-1.285c0-2.848.992-5.464 2.649-7.521C5.287 4.247 5.886 4 6.504 4h4.016a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23h1.294M7.498 15.25c.618 0 .991.724.725 1.282A7.471 7.471 0 0 0 7.5 19.75 2.25 2.25 0 0 0 9.75 22a.75.75 0 0 0 .75-.75v-.633c0-.573.11-1.14.322-1.672.304-.76.93-1.33 1.653-1.715a9.04 9.04 0 0 0 2.86-2.4c.498-.634 1.226-1.08 2.032-1.08h.384m-10.253 1.5H9.7m8.075-9.75c.01.05.027.1.05.148.593 1.2.925 2.55.925 3.977 0 1.487-.36 2.89-.999 4.125m.023-8.25c-.076-.365.183-.75.575-.75h.908c.889 0 1.713.518 1.972 1.368.339 1.11.521 2.287.521 3.507 0 1.553-.295 3.036-.831 4.398-.306.774-1.086 1.227-1.918 1.227h-1.053c-.472 0-.745-.556-.5-.96a8.95 8.95 0 0 0 .303-.54" />
+                              </svg>                            
+                            <span>Dislike</span>
+                        </button>
+                        <button class="flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
+                              </svg>                              
+                            <span>Chia sẻ</span>
+                        </button>
+                        <button class="flex items-center space-x-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                              </svg>                              
+                            <span>Tải xuống</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Video Description -->
+                <div class="mt-4">
+                    <p>9.541.083 lượt xem  21 thg 9, 2018</p>
+                    <p>#nhackhongloi #nhacthugian </p>
+                    <p>Nhạc Piano Nhẹ Nhàng Cùng Tiếng Mưa Rơi Sẽ Giúp Bạn Thư Giãn Giãm Stress Hiệu Quả
+                        #nhacthugian #nhackhongloi</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Suggested Videos -->
+        <div class="w-[320px] ml-4">
+            <h2 class="font-semibold mb-4">Video đề xuất</h2>
+            <div class="space-y-4">
+                <div class="flex items-center space-x-4 rounded-lg p-1">
+                    <img src="img/anh3.png" alt="Suggested Video" class="w-[160px] h-[90px] rounded-lg"> <!-- Bo góc cho hình ảnh -->
+                    <div>
+                        <p class="font-semibold">BXH Nhạc Trẻ</p>
+                        <p class="text-sm text-gray-500">Myn Xinh</p>
+                    </div>
+                </div>                
+                <div class="flex items-center space-x-4 rounded-lg p-1">
+                    <img src="img/anh4.png" alt="Suggested Video" class="w-[160px] h-[90px] rounded-lg">
+                    <div>
+                        <p class="font-semibold">Âm nhạc</p>
+                        <p class="text-sm text-gray-500">The Waters</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 rounded-lg p-1">
+                    <img src="img/anh5.png" alt="Suggested Video" class="w-[160px] h-[90px] rounded-lg">
+                    <div>
+                        <p class="font-semibold">Remix 2024</p>
+                        <p class="text-sm text-gray-500">Remix mixtap</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 rounded-lg p-1">
+                    <img src="img/anh6.png" alt="Suggested Video" class="w-[160px] h-[90px] rounded-lg">
+                    <div>
+                        <p class="font-semibold">Thư giãn cùng</p>
+                        <p class="text-sm text-gray-500">Instrumental</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 rounded-lg p-1">
+                    <img src="img/anh7.png" alt="Suggested Video" class="w-[160px] h-[90px] rounded-lg">
+                    <div>
+                        <p class="font-semibold">Thư giãn</p>
+                        <p class="text-sm text-gray-500">Ghibli Piano</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 rounded-lg p-1">
+                    <img src="img/anh8.png" alt="Suggested Video" class="w-[160px] h-[90px] rounded-lg">
+                    <div>
+                        <p class="font-semibold">Beautiful relaxing</p>
+                        <p class="text-sm text-gray-500">Guzheng</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4 rounded-lg p-1">
+                    <img src="img/anh9.png" alt="Suggested Video" class="w-[160px] h-[90px] rounded-lg">
+                    <div>
+                        <p class="font-semibold">Nhạc ballad</p>
+                        <p class="text-sm text-gray-500">Ballad</p>
+                    </div>
+                </div>
+                <!-- Add more suggested videos here -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
